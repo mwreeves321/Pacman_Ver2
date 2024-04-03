@@ -33,7 +33,7 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
           matrix:
-            node-version: [16.x,18.x,20.x]    
+            node-version: [20.x]    
         steps:
             - name: Checkout
               uses: actions/checkout@v3
@@ -60,12 +60,26 @@ jobs:
               run: |
                   npm run build
             - run: echo "<html><head><meta http-equiv='refresh' content='0; URL=${{github.server_url}}/${{github.repository}}' /></head><body>Redirecting to repository</body></html>" > ./dist/github.html
-            # - name: Create GitInspector Report
-            #   run: |
-            #       git clone https://github.com/jpwhite3/gitinspector.git
-            #       git clone ${{github.server_url}}/${{github.repository}} original-src/
-            #       cd original-src
-            #       python ../gitinspector/gitinspector.py ./original-src/ -f tsx,ts --grading -F html -x ./gitinspector > ./dist/report.html
+            - name: Create GitInspector Report
+              run: |
+                  # pushd ~ &> /dev/null
+                  git clone https://github.com/jpwhite3/gitinspector.git
+                  # cd gitinspector
+                  # echo "export PATH=$(pwd):"'$PATH' >> ~/.profile
+                  # popd &> /dev/null
+                  # source ~/.profile
+                  # git clone ${{github.server_url}}/${{github.repository}} original-src/
+                  # cd original-src
+                  # python ../gitinspector/gitinspector.py ./ -f tsx,ts --grading -F html -x ./gitinspector > ../dist/report.html
+                  # source ~/.profile
+                  # export PYTHONIOENCODING=utf-8
+                  # echo "Running for commit : $GITHUB_SHA"
+                  # python gitinspector.py --version
+                  echo "============ Git Inspector ==========="
+                  # python gitinspector.py ./ -f tsx,ts --grading -F html -x ./gitinspector > ../dist/report.html
+                  # gitinspector.py ./src/ --grading --format=html -f tsx,ts,html,css -x > ./dist/report.html
+                  python ./gitinspector/gitinspector.py ./src/ --grading --format=html -f tsx,ts,html,css -x ./gitinspector > ./dist/report.html
+                  echo "======================================"
             - name: Copy over index.md to docs/
               run: |
                   cp README.md docs/index.md
