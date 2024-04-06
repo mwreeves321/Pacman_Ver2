@@ -4,11 +4,12 @@ module.exports = {
     preset: "ts-jest",
     testEnvironment: "jsdom",
     resetMocks: true,
-        transform: {
-        "\\.(html|css)$": "<rootDir>/jest/raw-loader.js"
+    transform: {
+        "\\.(html|css)$": "<rootDir>/jest/raw-loader.js",
     },
     collectCoverageFrom: [
         "src/**/*.{js,jsx,ts,tsx}",
+        "test/**/*.{js,jsx,ts,tsx}",
         "!<rootDir>/node_modules/",
         "!src/serviceWorker.js",
         "!src/setupTests.js",
