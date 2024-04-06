@@ -53,10 +53,15 @@ jobs:
             - name: Build
               run: |
                   npm run build
-            - run: npm run test -- --coverage |& tee ./dist/tests.html
             - run: |
-                  for file in test/*; do md5sum $file; done > ./dist/integrity.html
+                  echo "<html><body><pre>" > ./dist/tests.html
+                  npm run test -- --coverage |& tee -a ./dist/tests.html
+                  echo "</pre></body></html>" >> ./dist/tests.html
+            - run: |
+                  echo "<html><body><pre>" > ./dist/integrity.html
+                  for file in test/*; do md5sum $file; done >> ./dist/integrity.html
                   md5sum .eslintrc.js >> ./dist/integrity.html
+                  echo "</pre></body></html>" >> ./dist/integrity.html
             - run: echo "<html><head><meta http-equiv='refresh' content='0; URL=${{github.server_url}}/${{github.repository}}' /></head><body>Redirecting to repository</body></html>" > ./dist/github.html
             - name: Create GitInspector Report
               run: |
