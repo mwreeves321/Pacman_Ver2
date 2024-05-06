@@ -1,5 +1,31 @@
-.title{
-	font-size: 20px;
-	color: #000;
-	margin-bottom: 20px;
+.Title {
+    font-size: 100px;
+    color: #ede90f;
+    margin-bottom: 10px;
+    display: inline-block;
+    margin-left: 300px;
+}
+
+.header {
+    background-color: #0f3bed;
+}
+
+body {
+    background-color: #0ded45;
+}
+
+.Start_Container {
+    font-size: 100px;
+    color: #ede90f;
+    margin-bottom: 10px;
+    display: inline-block;
+    margin-left: 400px;
+}
+
+.Start_Button {
+    font-size: 100px;
+    color: #ede90f;
+    margin-bottom: 10px;
+    display: inline-block;
+    margin-left: 400px;
 }
